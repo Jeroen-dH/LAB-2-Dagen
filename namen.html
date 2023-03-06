@@ -5,34 +5,76 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-    <div class="input-group-control">
+    <div id="vraagForm" class="input-group-control">
         <span>Hoeveel name wilt u in de array stoppen (min-3)</span>
-        <input style="width: 150px;" type="number" name="number" value="3" min="3" max="10" class="form-control">
+        <div class="d-flex">
+            <input style="width: 150px;" type="number" id="nummer" name="number" value="3" min="3" max="10" class="form-control">
+            <button class="btn btn-primary" id="set" onclick=" disablebtn()">Set</button>
+        </div>
     </div>
 
+    <div id="naamForm" style="display: none;">
+        <form onsubmit="return pushitem()">
+            <input type="text" id="input" placeholder="naam">
+        </form>
 
-    <form onsubmit="return pushitem()">
-        <input type="text" id="input">
-    </form>
+        <div>
+            <h4>De ingevoerde namen in de array zijn:</h4>
+            <div id="Namen"></div>
+        </div>
 
-    <div>
-        <h2>De ingevoerde namen in de array zijn:</h2>
-        <div id="Namen"></div>
+        <div>
+            <h4>De ingevoerde namen in de array in omgekeerde volgorde zijn:</h4>
+            <div id="NamenR"></div>
+        </div>
+
+        <div>
+            <a class="btn btn-primary" href="">reset</a>
+        </div>
     </div>
 </body>
 
 <script>
     let namenlist = [];
-
+    
     function pushitem(){
-        naam = document.getElementById("input").value;
-        namenlist.push(naam);
-        document.getElementById("Namen").innerHTML = namenlist;
-        console.log(namenlist);
-        return false;
+        amount = namenlist.length;
+        var nummer = document.getElementById("nummer").value;
+        // console.log(nummer);
+        
+        if(amount != nummer){
+            naam = document.getElementById("input").value;
+            namenlist.push(naam);
+            document.getElementById("Namen").innerHTML = namenlist;
+            // console.log(namenlist);
+            document.getElementById("input").value = "";
+            check();
+            return false;
+        }else{
+            check();
+            return false;
+        }
+    }
+    function check(){
+        var nummer2 = document.getElementById("nummer").value;
+        amount2 = namenlist.length;
+
+        console.log("amount = " + amount2 + "  Nummer = " + nummer2);
+        if(amount2 == nummer2){
+            document.getElementById("NamenR").innerHTML = namenlist.reverse();
+            namenlist.reverse();
+            return false;
+        }else{
+            return false;
+        }
+    }
+    function disablebtn(){
+        document.getElementById("nummer").disabled = true;
+        document.getElementById('naamForm').style.display = 'inline';
     }
 
 </script>
