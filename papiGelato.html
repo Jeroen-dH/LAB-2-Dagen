@@ -16,6 +16,7 @@
                 <p id="title">Papi Gelato</p>
                 <p id="subtext"> Maak hier uw bestelling.</p>
             </div>
+
             <div class="d-flex smaken">
                 <div class="kaart">
                     <div><img src="/LAB-2-Dagen/fotos/vanille.png" alt="Vanille ijs"></div>
@@ -95,6 +96,20 @@
                     </div>
 
                 </div>
+
+            </div>
+            <div>
+                <div class="keuze">
+                    <p>wilt u een bakje of horentje</p>
+                    <div class="position-relative d-flex justify-content-between">
+                        <div>
+                            <input type='checkbox' name='hoorntje' value='valuable' id="hoorntje"/><label class="shadow-lg hoorntje" for="hoorntje"></label> 
+                        </div>
+                        <div>
+                            <input type='checkbox' name='bakje' value='valuable' id="bakje"/><label class="shadow-lg bakje" for="bakje"></label> 
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -104,6 +119,36 @@
 
 <style>
 
+    input[type=checkbox] + .hoorntje{
+        background-image: url("fotos/hoorntje.jpg");
+        height: 100px;
+        width: 78px;
+    }
+    input[type=checkbox] + .bakje{
+        background-image: url("fotos/proxy-image.jpg");
+        height: 100px;
+        width: 100px;
+    }
+
+    input[type=checkbox] {
+        position: absolute;
+        /* display:none; */
+    }
+    
+    input[type=checkbox] + label
+    {
+        background: #999;
+        background-repeat: no-repeat;
+        mix-blend-mode: multiply;
+        background-size: contain;
+        display:inline-block;
+        padding: 3px;
+    }
+    input[type=checkbox]:checked + label
+    {
+        background-color: #0080FF;
+    }
+
     body{
         background-image:url(/LAB-2-Dagen/fotos/gelato.jpg);
         background-repeat: no-repeat;
@@ -111,14 +156,18 @@
     }
     .content{
         padding: 25px;
+        opacity: 100%;
     }
     .page{
         background-color: #f6efef;
         width: 75%;
-        height: 100vh;
+        height: 100%;
         margin: auto;
-        opacity: 90%;
+        /* opacity: 90%; */
         /* padding: 20px; */
+    }
+    body > .page{
+        opacity: 90%;
     }
     .title{
         text-align: center;
@@ -156,6 +205,7 @@
         max-width: 100%;
         width: 100%;
         flex-wrap: wrap;
+        margin-bottom: 40px;
     }
     #ijsText{
         padding: 0px 10px 10px 10px;
@@ -171,6 +221,13 @@
     .aantal{
         font-weight: lighter !important;
         font-size: 17px;
+    }
+    .keuze{
+        background-color: white;
+        border: 1px solid black;
+        padding: 10px;
+        width: 250px !important;
+        height: fit-content;
     }
 </style>
 
