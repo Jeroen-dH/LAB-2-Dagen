@@ -40,12 +40,12 @@
                             </div>
         
                             <div class="aantal">
-                                <p>Aantal bollen: 0</p>
+                                <p id="vanille">Aantal bollen : 0</p>
                             </div>
         
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-danger">-</button>
-                                <button class="btn btn-success">+</button>
+                                <button onclick="delbol('vanille')" class="btn btn-danger">-</button>
+                                <button onclick="addBol('vanille')" class="btn btn-success">+</button>
                             </div>
                         </div>
     
@@ -60,12 +60,12 @@
                             </div>
         
                             <div class="aantal">
-                                <p>Aantal bollen: 0</p>
+                                <p id="aardbei">Aantal bollen : 0</p>
                             </div>
         
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-danger">-</button>
-                                <button class="btn btn-success">+</button>
+                                <button onclick="delbol('aardbei')" class="btn btn-danger">-</button>
+                                <button onclick="addBol('aardbei')" class="btn btn-success">+</button>
                             </div>
                         </div>
     
@@ -80,12 +80,12 @@
                             </div>
         
                             <div class="aantal">
-                                <p>Aantal bollen: 0</p>
+                                <p id="smurf">Aantal bollen : 0</p>
                             </div>
         
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-danger">-</button>
-                                <button class="btn btn-success">+</button>
+                                <button onclick="delbol('smurf')" class="btn btn-danger">-</button>
+                                <button onclick="addBol('smurf')" class="btn btn-success">+</button>
                             </div>
                         </div>
     
@@ -100,12 +100,12 @@
                             </div>
         
                             <div class="aantal">
-                                <p>Aantal bollen: 0</p>
+                                <p id="bananen">Aantal bollen : 0</p>
                             </div>
         
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-danger">-</button>
-                                <button class="btn btn-success">+</button>
+                                <button onclick="delbol('bananen')" class="btn btn-danger">-</button>
+                                <button onclick="addBol('bananen')" class="btn btn-success">+</button>
                             </div>
                         </div>
     
@@ -120,12 +120,12 @@
                             </div>
         
                             <div class="aantal">
-                                <p>Aantal bollen: 0</p>
+                                <p id="pistache">Aantal bollen : 0</p>
                             </div>
         
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-danger">-</button>
-                                <button class="btn btn-success">+</button>
+                                <button onclick="delbol('pistache')" class="btn btn-danger">-</button>
+                                <button onclick="addBol('pistache')" class="btn btn-success">+</button>
                             </div>
                         </div>
     
@@ -140,12 +140,12 @@
                             </div>
         
                             <div class="aantal">
-                                <p>Aantal bollen: 0</p>
+                                <p id="chocolade">Aantal bollen : 0</p>
                             </div>
         
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-danger">-</button>
-                                <button class="btn btn-success">+</button>
+                                <button onclick="delbol('chocolade')" class="btn btn-danger">-</button>
+                                <button onclick="addBol('chocolade')" class="btn btn-success">+</button>
                             </div>
                         </div>
     
@@ -240,10 +240,90 @@
 
 
     <script>
-        var bollen = []
+        var bollen = {"vanille" : 0, "aardbei" : 0, "smurf" : 0, "bananen" : 0, "pistache" : 0, "chocolade" : 0};
 
         function addBol(smaak){
-            
+            switch (smaak){
+                case "vanille":
+                    var aantal = bollen['vanille'];
+                    bollen.vanille = aantal + 1;
+                    $("#vanille").text("Aantal bollen : " + bollen['vanille']);
+                    break;
+                case "aardbei" :
+                    var aantal = bollen['aardbei'];
+                    bollen.aardbei = aantal + 1;
+                    $("#aardbei").text("Aantal bollen : " + bollen['aardbei']);
+                    break;
+                case "smurf" :
+                    var aantal = bollen['smurf'];
+                    bollen.smurf = aantal + 1;
+                    $("#smurf").text("Aantal bollen : " + bollen['smurf']);
+                    break;
+                case "bananen" :
+                    var aantal = bollen['bananen'];
+                    bollen.bananen = aantal + 1;
+                    $("#bananen").text("Aantal bollen : " + bollen['bananen']);
+                    break;
+                case "pistache" :
+                    var aantal = bollen['pistache'];
+                    bollen.pistache = aantal + 1;
+                    $("#pistache").text("Aantal bollen : " + bollen['pistache']);
+                    break;
+                case "chocolade" :
+                    var aantal = bollen['chocolade'];
+                    bollen.chocolade = aantal + 1;
+                    $("#chocolade").text("Aantal bollen : " + bollen['chocolade']);
+                    break;
+
+            }
+        }
+
+        function delbol(smaak){
+            switch (smaak){
+                case "vanille":
+                    if (bollen['vanille'] != 0){
+                        var aantal = bollen['vanille'];
+                        bollen.vanille = aantal - 1;
+                        $("#vanille").text("Aantal bollen : " + bollen['vanille']);
+                    }
+                    break;
+                case "aardbei" :
+                    if (bollen['aardbei'] != 0){
+                        var aantal = bollen['aardbei'];
+                        bollen.aardbei = aantal - 1;
+                        $("#aardbei").text("Aantal bollen : " + bollen['aardbei']);
+                    }
+                    break;
+                case "smurf" :
+                    if (bollen['smurf'] != 0){
+                        var aantal = bollen['smurf'];
+                        bollen.smurf = aantal - 1;
+                        $("#smurf").text("Aantal bollen : " + bollen['smurf']);
+                    }
+                    break;
+                case "bananen" :
+                    if (bollen['bananen'] != 0){
+                        var aantal = bollen['bananen'];
+                        bollen.bananen = aantal - 1;
+                        $("#bananen").text("Aantal bollen : " + bollen['bananen']);
+                    }
+                    break;
+                case "pistache" :
+                    if (bollen['pistache'] != 0){
+                        var aantal = bollen['pistache'];
+                        bollen.pistache = aantal - 1;
+                        $("#pistache").text("Aantal bollen : " + bollen['pistache']);
+                    }
+                    break;
+                case "chocolade" :
+                    if (bollen['chocolade'] != 0){
+                        var aantal = bollen['chocolade'];
+                        bollen.chocolade = aantal - 1;
+                        $("#chocolade").text("Aantal bollen : " + bollen['chocolade']);
+                    }
+                    break;
+
+            }
         }
 
     </script>
