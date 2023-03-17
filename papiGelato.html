@@ -165,13 +165,13 @@
                         <p>wilt u een bakje of hoorntje</p>
                         <div class="position-relative d-flex justify-content-between">
                             <div>
-                                <input type='checkbox' name='hoorntje' value='valuable' id="hoorntje"/><label class="shadow-lg hoorntje" for="hoorntje"></label> 
+                                <input class="cb" type='checkbox' name='hoorntje' value='valuable' id="hoorntje" onchange="cbChange(this)" /><label class="shadow-lg hoorntje" for="hoorntje"></label> 
                                 <div class="prijs">
                                     €1.25
                                 </div>
                             </div>
                             <div>
-                                <input type='checkbox' name='bakje' value='valuable' id="bakje"/><label class="shadow-lg bakje" for="bakje"></label> 
+                                <input class="cb" type='checkbox' name='bakje' value='valuable' id="bakje" onchange="cbChange(this)" /><label class="shadow-lg bakje" for="bakje"></label> 
                                 <div class="prijs">
                                     €0.75
                                 </div>
@@ -183,25 +183,25 @@
                         <p>wilt u een topping op uw ijs</p>
                         <div class="position-relative d-flex justify-content-between toppings flex-wrap">
                             <div>
-                                <input type='checkbox' name='geen' value='valuable' id="geen"/><label class="shadow-lg geen" for="geen"></label> 
+                                <input class="cb2" type='checkbox' name='geen' value='valuable' onchange="cbChange2(this)" id="geen"/><label class="shadow-lg geen" for="geen"></label> 
                                 <div class="prijs">
                                     €0.00
                                 </div>
                             </div>
                             <div>
-                                <input type='checkbox' name='sprinkels' value='valuable' id="sprinkels"/><label class="shadow-lg sprinkels" for="sprinkels"></label> 
+                                <input class="cb2" type='checkbox' name='sprinkels' value='valuable' onchange="cbChange2(this)" id="sprinkels"/><label class="shadow-lg sprinkels" for="sprinkels"></label> 
                                 <div class="prijs">
                                     €0.30
                                 </div>
                             </div>
                             <div>
-                                <input type='checkbox' name='slagroom' value='valuable' id="slagroom"/><label class="shadow-lg slagroom" for="slagroom"></label> 
+                                <input class="cb2" type='checkbox' name='slagroom' value='valuable' onchange="cbChange2(this)" id="slagroom"/><label class="shadow-lg slagroom" for="slagroom"></label> 
                                 <div class="prijs">
                                     €0.50
                                 </div>
                             </div>
                             <div>
-                                <input type='checkbox' name='caramel-saus' value='valuable' id="caramel-saus"/><label class="shadow-lg caramel-saus" for="caramel-saus"></label> 
+                                <input class="cb2" type='checkbox' name='caramel-saus' value='valuable' onchange="cbChange2(this)" id="caramel-saus"/><label class="shadow-lg caramel-saus" for="caramel-saus"></label> 
                                 <div class="prijs">
                                     €0.90
                                 </div>
@@ -217,7 +217,7 @@
                 </div>
     
                 <div style="width: 100%; display: flex;">
-                    <button style="  width: 170px; height: 50px;"class="btn btn-primary m-auto ">Bestellen</button>
+                    <button style="  width: 170px; height: 50px;" class="btn btn-primary m-auto ">Bestellen</button>
                 </div>
                 <div style="text-align: center; margin: 40px;">
                     bedankt voor uw bestelling!
@@ -226,7 +226,19 @@
             </div>
         </div>
 
-        
+        <div id="checkout" class="content">
+            <div id="subtext" class="fs-1 text-center mb-3">
+                Uw bestelling
+            </div>
+
+            <div style="border-bottom: 1px solid black;" class="mb-3"></div>
+
+            <div>
+                
+            </div>
+
+        </div>
+
     </div>
     <footer style="text-align: center;">
         <div>Mijn mooie papi gelato ijs winkel</div>
@@ -326,6 +338,24 @@
             }
         }
 
+        function cbChange(obj) {
+            var cbs = document.getElementsByClassName("cb");
+            for (var i = 0; i < cbs.length; i++) {
+                cbs[i].checked = false;
+            }
+            obj.checked = true;
+        }
+        function cbChange2(obj) {
+            var cbs = document.getElementsByClassName("cb2");
+            for (var i = 0; i < cbs.length; i++) {
+                cbs[i].checked = false;
+            }
+            obj.checked = true;
+        }
+
+        function getBollen(){
+            
+        }
     </script>
 
 
