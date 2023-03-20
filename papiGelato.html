@@ -165,13 +165,13 @@
                         <p>wilt u een bakje of hoorntje</p>
                         <div class="position-relative d-flex justify-content-between">
                             <div>
-                                <input class="cb" type='checkbox' name='hoorntje' value='valuable' id="hoorntje" onchange="cbChange(this)" /><label class="shadow-lg hoorntje" for="hoorntje"></label> 
+                                <input checked="true" class="cb hoorn" type='checkbox' name='hoorntje' value='valuable' id="hoorntje" onchange="cbChange(this)" /><label class="shadow-lg hoorntje" for="hoorntje"></label> 
                                 <div class="prijs">
                                     €1.25
                                 </div>
                             </div>
                             <div>
-                                <input class="cb" type='checkbox' name='bakje' value='valuable' id="bakje" onchange="cbChange(this)" /><label class="shadow-lg bakje" for="bakje"></label> 
+                                <input class="cb bakje" type='checkbox' name='bakje' value='valuable' id="bakje" onchange="cbChange(this)" /><label class="shadow-lg bakje" for="bakje"></label> 
                                 <div class="prijs">
                                     €0.75
                                 </div>
@@ -183,7 +183,7 @@
                         <p>wilt u een topping op uw ijs</p>
                         <div class="position-relative d-flex justify-content-between toppings flex-wrap">
                             <div>
-                                <input class="cb2" type='checkbox' name='geen' value='valuable' onchange="cbChange2(this)" id="geen"/><label class="shadow-lg geen" for="geen"></label> 
+                                <input checked="true" class="cb2" type='checkbox' name='geen topping' value='valuable' onchange="cbChange2(this)" id="geen"/><label class="shadow-lg geen" for="geen"></label> 
                                 <div class="prijs">
                                     €0.00
                                 </div>
@@ -217,36 +217,44 @@
                 </div>
     
                 <div style="width: 100%; display: flex;">
-                    <button style="  width: 170px; height: 50px;" onclick="getBollen()" class="btn btn-primary m-auto ">Bestellen</button>
+                    <button style="  width: 170px; height: 50px;" onclick="confirmation()" class="btn btn-primary m-auto ">Bestellen</button>
                 </div>
                 <div style="text-align: center; margin: 40px;">
                     bedankt voor uw bestelling!
                     Tot ziens
                 </div>
             </div>
-        </div>
-
-        <div id="checkout" class="content" style="display:none">
-            <div id="subtext" class="fs-1 text-center mb-3">
-                Uw bestelling
-            </div>
-
-            <div style="border-bottom: 1px solid black;" class="mb-3"></div>
-
-            <div class="bestelling">
-                <div>
-                    <table id="myTable" class="table" >
-                        <tr>
-                            <th>aantal</th>
-                            <th>smaak</th>
-                            <th>prijs bol</th>
-                            <th>totaal</th>
-                        </tr>
-                    </table>
+            <div id="checkout" class="content" style="display:none">
+                <div class="title">
+                    <p id="title2">Papi Gelato</p>
+                    <div id="subtext" class="fs-1 text-center mb-3">Uw bestelling</div>
+                </div>
+    
+                <div style="border-bottom: 1px solid black;" class="mb-4"></div>
+    
+                <div class="bestelling mb-5">
+                    <div>
+                        <table id="myTable" class="table" >
+                            <tr>
+                                <th>aantal</th>
+                                <th>smaak</th>
+                                <th>prijs bol</th>
+                                <th>totaal</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+    
+                <div class="w-100 text-center fs-5">
+                    Bedankt voor uw bestelling!<br>
+                    Wij wensen u nog een fijne dag!
+                </div>
+                <div style="width:fit-content; margin:auto; margin-top: 25px;">
+                    <a href="papiGelato.html" class="btn btn-primary">terug naar menu</a>
                 </div>
             </div>
-
         </div>
+
 
     </div>
     <footer style="text-align: center;">
@@ -262,6 +270,8 @@
 
     <script>
         var bollen = {"vanille" : 0, "aardbei" : 0, "smurf" : 0, "bananen" : 0, "pistache" : 0, "chocolade" : 0};
+        var totaal = 0;
+
 
         // $('table').find('tbody').append("<td>1x</td><td>vanille</td><td><b>$0.95</b></td><td><b>$0.95</b></td>");
 
@@ -297,7 +307,15 @@
                     bollen.chocolade = aantal + 1;
                     $("#chocolade").text("Aantal bollen : " + bollen['chocolade']);
                     break;
-
+                    
+                }
+            if(bollen.vanille + bollen.aardbei + bollen.smurf + bollen.bananen + bollen.pistache + bollen.chocolade == 8){
+                $(".btn-success").prop('disabled', true);
+            }
+            if(bollen.vanille + bollen.aardbei + bollen.smurf + bollen.bananen + bollen.pistache + bollen.chocolade > 3){                
+                $('.hoorn').prop('disabled', true);
+                $('.hoorn').prop('checked', false);
+                $('.bakje').prop('checked', true);
             }
         }
 
@@ -345,7 +363,13 @@
                         $("#chocolade").text("Aantal bollen : " + bollen['chocolade']);
                     }
                     break;
-
+                    
+                }
+            if(bollen.vanille + bollen.aardbei + bollen.smurf + bollen.bananen + bollen.pistache + bollen.chocolade == 7){
+                $(".btn-success").prop('disabled', false);
+            }
+            if(bollen.vanille + bollen.aardbei + bollen.smurf + bollen.bananen + bollen.pistache + bollen.chocolade <= 3){                
+                $('.hoorn').prop('disabled', false);
             }
         }
 
@@ -367,37 +391,92 @@
         function getBollen(){
             $("#winkel").css("display","none");
             $("#checkout").show();
-            $("#checkout").css("height","100vh");
+            $("#checkout").css("height","100%");
 
             if(bollen.vanille){
                 console.log("Vanile = True");
                 var prijs = bollen.vanille * 0.95;
+                totaal += (Math.round(prijs * 100) / 100);
                 $('table').find('tbody').append("<tr><td>"+bollen.vanille+"x</td><td>Vanille</td><td><b>$0.95</b></td><td><b>$"+(Math.round(prijs * 100) / 100).toFixed(2)+"</b></td></tr>");
             }
             if(bollen.aardbei){
                 console.log("aardbei = True");
                 var prijs2 = bollen.aardbei * 0.95;
+                totaal += (Math.round(prijs2 * 100) / 100);
                 $('table').find('tbody').append("<tr><td>"+bollen.aardbei+"x</td><td>Aardbei</td><td><b>$0.95</b></td><td><b>$"+(Math.round(prijs2 * 100) / 100).toFixed(2)+"</b></td></tr>");
             }
             if(bollen.smurf){
                 console.log("smurf = True");
                 var prijs3 = bollen.smurf * 0.95;
+                totaal += (Math.round(prijs3 * 100) / 100);
                 $('table').find('tbody').append("<tr><td>"+bollen.smurf+"x</td><td>Smurf</td><td><b>$0.95</b></td><td><b>$"+(Math.round(prijs3 * 100) / 100).toFixed(2)+"</b></td></tr>");
             }
             if(bollen.bananen){
                 console.log("bananen = True");
                 var prijs4 = bollen.bananen * 0.95;
+                totaal += (Math.round(prijs4 * 100) / 100);
                 $('table').find('tbody').append("<tr><td>"+bollen.bananen+"x</td><td>Bananen</td><td><b>$0.95</b></td><td><b>$"+(Math.round(prijs4 * 100) / 100).toFixed(2)+"</b></td></tr>");
             }
             if(bollen.pistache){
                 console.log("pistache = True");
                 var prijs5 = bollen.pistache * 0.95;
+                totaal += (Math.round(prijs5 * 100) / 100);
                 $('table').find('tbody').append("<tr><td>"+bollen.pistache+"x</td><td>Pistache</td><td><b>$0.95</b></td><td><b>$"+(Math.round(prijs5 * 100) / 100).toFixed(2)+"</b></td></tr>");
             }
             if(bollen.chocolade){
                 console.log("chocolade = True"); 
                 var prijs6 = bollen.chocolade * 0.95;
+                totaal += (Math.round(prijs6 * 100) / 100);
                 $('table').find('tbody').append("<tr><td>"+bollen.chocolade+"x</td><td>Chocolade</td><td><b>$0.95</b></td><td><b>$"+(Math.round(prijs6 * 100) / 100).toFixed(2)+"</b></td></tr>");
+            }
+
+            var cbs2 = document.getElementsByClassName("cb2");
+            for (var i = 0; i < cbs2.length; i++) {
+                if(cbs2[i].checked){
+                    console.log(cbs2[i].name);
+                    switch(cbs2[i].name){
+                        case "geen topping":
+                            prijs = 0;
+                            break;
+                        case "sprinkels":
+                            prijs = 0.30;
+                            break;
+                        case "slagroom":
+                            prijs = 0.50;
+                            break;
+                        case "caramel-saus":
+                            prijs = 0.90;
+                            break;
+                    }
+                    $('table').find('tbody').append("<tr><td>1x</td><td>"+cbs2[i].name+"</td><td><b></b></td><td><b>$"+(Math.round(prijs * 100) / 100).toFixed(2)+"</b></td></tr>");
+                }
+            }
+            totaal += (Math.round(prijs * 100) / 100)
+            var cbs = document.getElementsByClassName("cb");
+            for (var x = 0; x < cbs.length; x++) {
+                if(cbs[x].checked){
+                    switch(cbs[x].name){
+                        case "bakje":
+                            prijs = 0.90;
+                            break;
+                        case "hoorntje":
+                            prijs = 1.25;
+                            break;
+                    }
+                    $('table').find('tbody').append("<tr><td>1x</td><td>"+cbs[x].name+"</td><td><b></b></td><td><b>$"+(Math.round(prijs * 100) / 100).toFixed(2)+"</b></td></tr>");
+                }
+            }
+            totaal += (Math.round(prijs * 100) / 100)
+            $('table').find('tbody').append("<tr><td>Totaal prijs</td><td></td><td><b></b></td><td><b>$"+(Math.round(totaal * 100) / 100).toFixed(2)+"</b></td></tr>");
+
+        }
+
+        function confirmation(){
+            var result = confirm("Weet je zeker dat je dit wilt bestellen?");
+            if(result){
+                getBollen()
+            }else{
+                return false;
             }
         }
     </script>
@@ -478,6 +557,12 @@
     }
 
     #title{
+        font-size: 55px;
+        background: -webkit-linear-gradient(#ff1e0a, #b31ada, #eed726);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    #title2{
         font-size: 55px;
         background: -webkit-linear-gradient(#ff1e0a, #b31ada, #eed726);
         -webkit-background-clip: text;
